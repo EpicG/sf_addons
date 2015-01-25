@@ -1,0 +1,9 @@
+"AddonInfo"
+{
+	"name"        "Starfall Addons"
+	"version"     "Git"
+	"author_name" "Brandon 'EpicG' Davidson"
+	"author_url"  "http://www.github.com/EpicG"
+	"info"        "Addons for starall"
+	"override"    "1"
+}
