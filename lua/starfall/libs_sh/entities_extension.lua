@@ -7,6 +7,7 @@ local ents_metatable = SF.Entities.Metatable
 local ents_methods = SF.Entities.Methods
 local wrap, unwrap = SF.Entities.Wrap, SF.Entities.Unwrap
 local vunwrap = SF.UnwrapObject
+local isValid = SF.Entities.IsValid
 
 --- Returns whether the entity is a vehicle or not
 -- @shared

@@ -1,5 +1,6 @@
 local ents_methods = SF.Entities.Methods
 local wrap, unwrap = SF.Entities.Wrap, SF.Entities.Unwrap
+local isValid = SF.Entities.IsValid
 
 --- Checks the entities frozen state
 -- @return True if entity is frozen
