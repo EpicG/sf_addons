@@ -1,5 +1,5 @@
-local wlwrap = SF.Wire.wirelink.wrap
-local wlunwrap = SF.Wire.wirelink.unwrap
+local wlwrap = SF.Wire.WlWrap
+local wlunwrap = SF.Wire.WlUnwrap
 
 --- Returns the wirelink for that entity
 function SF.Entities.Methods:wirelink( )
