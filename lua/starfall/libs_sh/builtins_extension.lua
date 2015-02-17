@@ -1,5 +1,29 @@
+function SF.DefaultEnvironment.lerp( percent, from, to )
+	SF.CheckType( percent, "number" )
+	SF.CheckType( from, "number" )
+	SF.CheckType( to, "number" )
+
+	Lerp( percent, from, to )
+end
+
+function SF.DefaultEnvironment.lerpAngle( percent, from, to )
+	SF.CheckType( percent, "number" )
+	SF.CheckType( from, SF.Types[ "Angle" ] )
+	SF.CheckType( to, SF.Types[ "Angle" ] )
+
+	LerpAngle( percent, SF.UnwrapObject( from ), SF.UnwrapObject( to ) )
+end
+
+function SF.DefaultEnvironment.lerpVector( percent, from, to )
+	SF.CheckType( percent, "number" )
+	SF.CheckType( from, SF.Types[ "Vector" ] )
+	SF.CheckType( to, SF.Types[ "Vector" ] )
+
+	LerpVector( percent, SF.UnwrapObject( from ), SF.UnwrapObject( to ) )
+end
+
 if CLIENT then
-	--- Teturns client's screen width
+	--- Returns client's screen width
 	-- @name SF.DefaultEnvironment.scrW
 	-- @class function
 	-- @return Screen width of current client
