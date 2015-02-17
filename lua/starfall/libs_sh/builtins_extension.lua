@@ -3,7 +3,7 @@ function SF.DefaultEnvironment.lerp( percent, from, to )
 	SF.CheckType( from, "number" )
 	SF.CheckType( to, "number" )
 
-	Lerp( percent, from, to )
+	return Lerp( percent, from, to )
 end
 
 function SF.DefaultEnvironment.lerpAngle( percent, from, to )
@@ -11,7 +11,7 @@ function SF.DefaultEnvironment.lerpAngle( percent, from, to )
 	SF.CheckType( from, SF.Types[ "Angle" ] )
 	SF.CheckType( to, SF.Types[ "Angle" ] )
 
-	LerpAngle( percent, SF.UnwrapObject( from ), SF.UnwrapObject( to ) )
+	return SF.WrapObject( LerpAngle( percent, SF.UnwrapObject( from ), SF.UnwrapObject( to ) ) )
 end
 
 function SF.DefaultEnvironment.lerpVector( percent, from, to )
@@ -19,7 +19,7 @@ function SF.DefaultEnvironment.lerpVector( percent, from, to )
 	SF.CheckType( from, SF.Types[ "Vector" ] )
 	SF.CheckType( to, SF.Types[ "Vector" ] )
 
-	LerpVector( percent, SF.UnwrapObject( from ), SF.UnwrapObject( to ) )
+	return SF.WrapObject( LerpVector( percent, SF.UnwrapObject( from ), SF.UnwrapObject( to ) ) )
 end
 
 if CLIENT then
