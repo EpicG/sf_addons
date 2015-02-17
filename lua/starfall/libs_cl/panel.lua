@@ -23,6 +23,29 @@ function panel_metamethods.__newindex( t, k, v )
 	end
 end
 
+local panelFuncs = {}
+
+--- Checks the panel object to make sure it is the proper class to run the function
+-- @param panel The panel object to check
+-- @param func The function name
+local function check( panel, func )
+    class = punwrap( panel ):GetClassName()
+    if panelFuncs[ func ] and ( panelFuncs[ func ][ class ] or panelFuncs[ func ][ "*" ] ) then
+        return true
+    end
+    return false
+end
+
+--- Registers a function to the panelFuncs table along with the classes able to run it
+-- @param func The function that the "perm" is associated with
+-- @param classes Table of classes that have permission to run the function, an entry of "*" allows all classes
+local function register( func, classes )
+    panelFuncs[ func ] = {}
+    for k, v in pairs ( classes ) do
+        panelFuncs[ func ][ v ] = true
+    end
+end
+
 --- Adds the specified object to the panel
 -- @param panel The panel to be added.
 -- @return The new panel object
