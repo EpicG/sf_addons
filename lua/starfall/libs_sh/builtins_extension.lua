@@ -35,3 +35,9 @@ if CLIENT then
 	-- @return Screen height of current client
 	SF.DefaultEnvironment.scrH = ScrH
 end
+
+--- Returns the time in seconds it took to render the last frame
+-- @name SF.DefaultEnvironment.frameTime
+-- @class function
+-- @return Time in seconds
+SF.DefaultEnvironment.frameTime = FrameTime
