@@ -3,16 +3,9 @@ local ents_metatable = SF.Entities.Metatable
 local wrap, unwrap = SF.Entities.Wrap, SF.Entities.Unwrap
 local isValid = SF.Entities.IsValid
 
-do
-	P.registerPrivilege( "entities.setBonePos", "setBonePos", "Allows the user to get the bone position of an entity" )
-	P.registerPrivilege( "entities.getBonePos", "getBonePos", "Allows the user to set the bone position of an entity" )
-	P.registerPrivilege( "entities.setBoneAngles", "setBoneAngles", "Allows the user to get the bone angles of an entity" )
-	P.registerPrivilege( "entities.getBoneAngles", "getBoneAngles", "Allows the user to set the bone angles of an entity" )
-end
-
 --- Checks the entities frozen state
 -- @return True if entity is frozen
-function ents_methods:getFrozen ()
+function ents_methods:getFrozen()
 	SF.CheckType( self, ents_metatable )
 
 	local ent = unwrap( self )
@@ -26,7 +19,7 @@ end
 --- Sets the entity to be Solid or not.
 -- For more information please refer to GLua function http://wiki.garrysmod.com/page/Entity/SetNotSolid
 -- @param solid Boolean, Should the entity be solid?
-function ents_methods:setSolid ( solid )
+function ents_methods:setSolid( solid )
 	local ent = unwrap( self )
 	if not isValid( ent ) then return false, "entity not valid" end
 	
@@ -37,7 +30,7 @@ end
 
 --- Sets entity gravity
 -- @param grav Should the entity respect gravity?
-function ents_methods:setGravity ( grav )
+function ents_methods:setGravity( grav )
 	SF.CheckType( self, ents_metatable )
 	
 	local ent = unwrap( self )
@@ -63,7 +56,7 @@ local function ent1or2 ( ent, con, num )
 end
 
 --- Gets what the entity is welded to
-function ents_methods:getWeldedTo ()
+function ents_methods:getWeldedTo()
 	local this = unwrap( self )
 	if not isValid( this ) then return nil end
 	if not constraint.HasConstraints( this ) then return nil end
@@ -71,55 +64,12 @@ function ents_methods:getWeldedTo ()
 	return wrap( ent1or2( this, constraint.FindConstraint( this, "Weld" ) ) )
 end
 
---- Returns the position of the bone
--- @param id The ID of the bone to use
--- @return The position of the bone
-function ents_methods:getBonePos( id )
+--- Returns the driver of a vehicle
+function ents_methods:getDriver()
 	SF.CheckType( self, ents_metatable )
-	this = unwrap( self )
+	local this = unwrap( self )
+	if not isValid( this ) then return nil end
+	if not this:IsVehicle() then return nil end
 
-	if not SF.Permissions.check( SF.instance.player, this, "entities.getBonePos" ) then SF.throw( "Insufficient permissions", 2 ) end
-
-
-	local pos, _ = this:GetBonePosition( )
-	return SF.WrapObject( pos )
-end
-
---- Sets the position of the bone
--- @param id The ID of the bone to use
--- @param pos The new position of the bone
-function ents_methods:setBonePos( id, pos )
-	SF.CheckType( self, ents_metatable )
-	this = unwrap( self )
-
-	if not SF.Permissions.check( SF.instance.player, this, "entities.setBonePos" ) then SF.throw( "Insufficient permissions", 2 ) end
-
-
-	local _, ang = this:GetBonePosition( )
-	this:SetBonePosition( id, SF.UnwrapObject( pos ), ang )
-end
-
---- Returns the angle of the bone
--- @param id The ID of the bone to use
-function ents_methods:getBonePos( id )
-	SF.CheckType( self, ents_metatable )
-	this = unwrap( self )
-
-	if not SF.Permissions.check( SF.instance.player, this, "entities.getBoneAngles" ) then SF.throw( "Insufficient permissions", 2 ) end
-
-	local _, ang = this:GetBonePosition( )
-	return SF.WrapObject( ang )
-end
-
---- Sets the angle of the bone
--- @param id The ID of the bone to use
--- @param ang The new angle of the bone
-function ents_methods:setBoneAngles( id, ang )
-	SF.CheckType( self, ents_metatable )
-	this = unwrap( self )
-
-	if not SF.Permissions.check( SF.instance.player, this, "entities.getBoneAngles" ) then SF.throw( "Insufficient permissions", 2 ) end
-
-	local pos, _ = this:GetBonePosition( )
-	this:SetBonePosition( id, pos, SF.UnwrapObject( ang ) )
+	return wrap( this:GetDriver() )
 end
