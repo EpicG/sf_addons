@@ -73,3 +73,24 @@ function constraint_lib.getTable( ent )
 
 	return ret
 end
+
+--- Creates a weld between two entities
+-- @param enta The first entity
+-- @param entb The second entity
+-- @param bonea The bone of the first entity, 0 for regular props
+-- @param boneb The bone of the second entity, 0 for regualar props
+-- @param forcelimit The amount of forece appliable to the constraint before it breaks ( 0 is never )
+-- @param nocollide True to nocollide the entities
+function constraint_lib.weld( enta, entb, bonea, boneb, forcelimit, nocollide )
+	SF.CheckType( enta, ents_metatable )
+	SF.CheckType( entb, ents_metatable )
+	SF.CheckType( bonea, "number" )
+	SF.CheckType( boneb, "number" )
+	SF.CheckType( forcelimit, "number" )
+	SF.CheckType( nocollide, "boolean" )
+
+	enta = unwrap( enta )
+	entb = unwrap( entb )
+
+	return vwrap( constraint.Weld( enta, entb, bonea, boneb, forcelimit, nocollide, false ) )
+end
