@@ -13,7 +13,7 @@ local isValid = SF.Entities.IsValid
 -- @shared
 -- @return True if vehicle, false if not
 function ents_methods:isVehicle( )
-	SF.CheckType( self, ents_metamethods )
+	SF.CheckType( self, ents_metatable )
 	local ent = unwrap( self )
 	return ent:IsVehicle()
 end
@@ -25,6 +25,7 @@ end
 -- @param value Number, The value you're setting the bodygroup to.
 -- @return The Entity being modified.
 function ents_methods:setBodygroup ( bodygroup, value )
+	SF.CheckType( self, ents_metatable )
     SF.CheckType( bodygroup, "number" )
     SF.CheckType( value, "number" )
 
