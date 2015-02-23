@@ -1,3 +1,4 @@
+--[[
 local holograms_library = SF.Libraries.Get("holograms")
 
 --- Creates a hologram from table.
@@ -96,3 +97,4 @@ function holograms_library.createFromTable ( holoTable )
         -- TODO: Need to fire a umsg here to assign clientside ownership(?)
     end
 end
+--]]
