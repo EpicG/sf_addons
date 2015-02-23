@@ -23,6 +23,35 @@ function panel_metamethods.__newindex( t, k, v )
 	end
 end
 
+SF.Panel.insts = {}
+local insts = SF.Panel.insts
+SF.Panel.plyCount = {}
+local plyCount = SF.Panel.plyCount
+
+SF.Libraries.AddHook("initialize",function(inst)
+	inst.data.panels = {
+		panels = {},
+		count = 0
+	}
+
+	insts[ inst ] = true
+	plyCount[ inst.player ] = plyCount[ inst.player ] or inst.data.panels.count
+end)
+
+SF.Libraries.AddHook("deinitialize", function(inst)
+	local panels = inst.data.panels.panels
+	for panel, _ in pairs( panels ) do
+		if IsValid( punwrap( panel ) ) then
+			panel:remove( )
+		end
+		panels[ panel ] = nil
+	end
+	plyCount[ inst.player ] = plyCount[ inst.player ] - inst.data.panels.count
+	inst.data.panels.count = 0
+
+	insts[ inst ]= nil
+end)
+
 local panelFuncs = {}
 
 --- Checks the panel object to make sure it is the proper class to run the function
