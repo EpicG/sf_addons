@@ -9,6 +9,10 @@ local pwrap, punwrap = SF.CreateWrapper( panel_metamethods, true, true, debug.ge
 SF.Panel.wrap = pwrap
 SF.Panel.unwrap = punwrap
 
+do
+	local P = SF.Permissions
+	P.registerPrivilege( "panel.access", "Panel Access", "Allows the user to have access to panels" )end
+
 function panel_metamethods.__newindex( t, k, v )
 	if type( v ) == "function" then
 		local instance = SF.instance
@@ -42,7 +46,7 @@ SF.Libraries.AddHook("deinitialize", function(inst)
 	local panels = inst.data.panels.panels
 	for panel, _ in pairs( panels ) do
 		if IsValid( punwrap( panel ) ) then
-			panel:remove( )
+			punwrap( panel ):Remove( )
 		end
 		panels[ panel ] = nil
 	end
@@ -82,6 +86,8 @@ function panel_methods:add( panel )
     SF.CheckType( self, panel_metamethods )
     SF.CheckType( panel, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
     return pwrap( punwrap( self ):Add( punwrap( panel ) ) )
 end
 
@@ -90,6 +96,8 @@ end
 function panel_methods:alignBottom( offset )
     SF.CheckType( self, panel_metamethods )
 	if offset then SF.CheckType( offset, "number" ) end
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
     punwrap( self ):AlignBottom( offset )
 end
@@ -100,6 +108,8 @@ function panel_methods:alignLeft( offset )
     SF.CheckType( self, panel_metamethods )
 	if offset then SF.CheckType( offset, "number" ) end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
     punwrap( self ):AlignLeft( offset )
 end
 
@@ -109,6 +119,8 @@ function panel_methods:alignRight( offset )
     SF.CheckType( self, panel_metamethods )
 	if offset then SF.CheckType( offset, "number" ) end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
     punwrap( self ):AlignRight( offset )
 end
 
@@ -117,6 +129,8 @@ end
 function panel_methods:alignTop( offset )
     SF.CheckType( self, panel_metamethods )
     if offset then SF.CheckType( offset, "number" ) end
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
     punwrap( self ):AlignTop( offset )
 end
@@ -136,6 +150,8 @@ function panel_methods:alphaTo( alpha, duration, delay, callback )
 	if delay then SF.CheckType( delay, "number" ) end
 	if callback then SF.CheckType( callback, "function" ) end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	local instance = SF.instance
     punwrap( self ):AlphaTo( alpha, duration, delay, function( animData, panel )
 		if callback then
@@ -151,7 +167,10 @@ end
 -- @return The system time when all animations will end
 function panel_methods:animTail( )
     SF.CheckType( self, panel_metamethods )
-    return punwrap( self ):AnimTail( )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
+	return punwrap( self ):AnimTail( )
 end
 
 --- Appends text to a RichText element
@@ -160,12 +179,16 @@ function panel_methods:appendText( text )
     SF.CheckType( self, panel_metamethods )
     SF.CheckType( text, "string" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
     punwrap( self ):AppendText( text )
 end
 
 --- Centers the panel to its parent
 function panel_methods:center( )
     SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
     punwrap( self ):Center( )
 end
@@ -176,6 +199,8 @@ function panel_methods:centerHorizontal( fraction )
     SF.CheckType( self, panel_metamethods )
     SF.CheckType( fraction, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
     punwrap( self ):CenterHorizontal( fraction )
 end
 
@@ -185,6 +210,8 @@ function panel_methods:centerVertical( fraction )
     SF.CheckType( self, panel_metamethods )
     SF.CheckType( fraction, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
     punwrap( self ):CenterVertical( fraction )
 end
 
@@ -192,6 +219,8 @@ end
 -- @return Number of panels parented
 function panel_methods:childCount( )
     SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):ChildCount( )
 end
@@ -201,12 +230,16 @@ end
 function panel_methods:childrenSize()
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):ChildrenSize( )
 end
 
 --- Marks all children for deletion
 function panel_methods:clear( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):Clear( )
 end
@@ -222,6 +255,8 @@ function panel_methods:colorTo( color, duration, delay, callback )
 	SF.CheckType( duration, "number" )
 	if delay then SF.CheckType( delay, "number" ) end
 	if callback then SF.CheckType( callback, "function" ) end
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	local instance = SF.instance
 	punwrap( self ):ColorTo( color, duration, delay, function( animData, panel )
@@ -240,6 +275,8 @@ function panel_methods:command( command )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( command, "string" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):Command( command )
 end
 
@@ -251,6 +288,8 @@ function panel_methods:copyBase( src )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( src, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):CopyBase( punwrap( src ) )
 end
 
@@ -259,6 +298,8 @@ end
 function panel_methods:copyBounds( src )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( src, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):CopyBounds( punwrap( src ) )
 end
@@ -269,6 +310,8 @@ function panel_methods:copyHeight( src )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( src, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):CopyHeight( punwrap( src ) )
 end
 
@@ -277,6 +320,8 @@ end
 function panel_methods:copyPos( src )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( src, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):CopyPos( punwrap( src ) )
 end
@@ -287,6 +332,8 @@ function panel_methods:copyWidth( src )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( src, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):CopyWidth( punwrap( src ) )
 end
 
@@ -294,6 +341,8 @@ end
 -- @return x, y coordinates of the cursor relative to the top left of the panel
 function panel_methods:cursorPos( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):CursorPos( )
 end
@@ -306,6 +355,8 @@ end
 function panel_methods:disableLerp( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):DisableLerp( )
 end
 
@@ -315,6 +366,8 @@ end
 function panel_methods:distance( target )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( target, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):Distance( target )
 end
@@ -327,6 +380,8 @@ end
 function panel_methods:distanceFrom( target )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( target, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):DistanceFrom( target )
 end
@@ -344,6 +399,8 @@ function panel_methods:dock( dockType )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( dockType, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):Dock( dockType )
 end
 
@@ -359,6 +416,8 @@ function panel_methods:dockMargin( marginLeft, marginTop, marginRight, marginBot
 	SF.CheckType( marginTop, "number" )
 	SF.CheckType( marginRight, "number" )
 	SF.CheckType( marginBottom, "number" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):DockMargin( marginLeft, marginTop, marginRight, marginBottom )
 end
@@ -376,6 +435,8 @@ function panel_methods:dockMargin( paddingLeft, paddingTop, paddingRight, paddin
 	SF.CheckType( paddingRight, "number" )
 	SF.CheckType( paddingBottom, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):DockPadding( paddingLeft, paddingTop, paddingRight, paddingBottom )
 end
 
@@ -384,6 +445,8 @@ end
 function panel_methods:doModal( doModal )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( doModal, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):DoModal( doModal )
 end
@@ -396,6 +459,8 @@ function panel_methods:droppable( name )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( name, "string" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):Droppable( name )
 end
 --]]
@@ -404,6 +469,8 @@ end
 -- @return Whether the end point of the selection box was within the selection canvas.
 function panel_methods:endBoxSelection( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):EndBoxSelection( )
 end
@@ -415,12 +482,16 @@ function panel_methods:find( panelName )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( panelName, "string" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return pwrap( punwrap( self ):Find( panelName ) )
 end
 
 --- Sets the focus to the next panel in the focus queue
 function panel_methods:focusNext( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):FocusNext( )
 end
@@ -429,6 +500,8 @@ end
 function panel_methods:focusPrevious( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):FocusPrevious( )
 end
 
@@ -436,6 +509,8 @@ end
 -- @return Alpha multiplier
 function panel_methods:getAlpha( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):GetAlpha( )
 end
@@ -448,6 +523,8 @@ end
 function panel_methods:getBounds( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):GetBounds( )
 end
 
@@ -455,6 +532,8 @@ end
 -- @return The caret position from the start of the text
 function panel_methods:getCaretPos( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):GetCaretPos( )
 end
@@ -465,6 +544,8 @@ end
 function panel_methods:getChild( index )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return pwrap( punwrap( self ):GetChild( index ) )
 end
 
@@ -474,6 +555,8 @@ end
 -- @return Table of child panels
 function panel_methods:getChildren( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	local children = punwrap( self ):GetChildren( )
 
@@ -497,6 +580,8 @@ function panel_methods:getChildrenInRect( x, y, w, h )
 	SF.CheckType( w, "number" )
 	SF.CheckType( h, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	local children = punwrap( self ):GetChildrenInRect( x, y, w, h )
 
 	for k, v in pairs( children ) do --Wraps all panels in the table of children to prevent an escape from the sandbox
@@ -511,6 +596,8 @@ end
 function panel_methods:getClassName( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):GetClassName( )
 end
 
@@ -524,6 +611,8 @@ function panel_methods:getClosestChild( x, y )
 	SF.CheckType( x, "number" )
 	SF.CheckType( y, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	local panel, distance = punwrap( self ):GetClosestChild( x, y )
 	return pwrap( panel ), distance
 end
@@ -534,6 +623,8 @@ end
 function panel_methods:getContentSize( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):GetContentSize( )
 end
 
@@ -541,6 +632,8 @@ end
 -- @return The dock enum
 function panel_methods:getDock( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):GetDock( )
 end
@@ -550,6 +643,8 @@ end
 function panel_methods:getFont( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):GetFont( )
 end
 
@@ -557,6 +652,8 @@ end
 -- @return Panel name
 function panel_methods:getName( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):GetName( )
 end
@@ -566,6 +663,8 @@ end
 function panel_methods:getNumLines( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):GetNumLines( )
 end
 
@@ -573,6 +672,8 @@ end
 -- @return Parent panel
 function panel_methods:getParent( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return pwrap( punwrap( self ):GetParent( ) )
 end
@@ -582,6 +683,8 @@ end
 -- @return Y coordinate
 function panel_methods:getPos( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):GetPos( )
 end
@@ -593,6 +696,8 @@ end
 function panel_methods:getSelectionCanvas( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	local canvas = punwrap( self ):GetSelectionCanvas( )
 	if canvas then return pwrap( canvas ) else return nil end
 end
@@ -603,6 +708,8 @@ end
 function panel_methods:getSize( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):GetSize( )
 end
 
@@ -611,6 +718,8 @@ end
 function panel_methods:getTall( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):GetTall( )
 end
 
@@ -618,6 +727,8 @@ end
 -- @return The text of the panel, max of 1023 bytes
 function panel_methods:getText( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):GetText( )
 end
@@ -628,6 +739,8 @@ end
 function panel_methods:getTextInset( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):GetTextInset( )
 end
 
@@ -637,6 +750,8 @@ end
 function panel_methods:getTextSize( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):GetTextSize( )
 end
 
@@ -644,6 +759,8 @@ end
 -- @return The value the panel holds
 function panel_methods:getValue( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	local ret = punwrap( self ):GetValue( )
 	return SF.WrapObject( ret ) or ret
@@ -654,6 +771,8 @@ end
 function panel_methods:getWide( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):GetWide( )
 end
 
@@ -661,12 +780,16 @@ end
 function panel_methods:gotoTextEnd( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):GotoTextEnd( )
 end
 
 --- Forces RichText to scroll to the top of its text
 function panel_methods:gotoTextStart( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):GotoTextStart( )
 end
@@ -676,6 +799,8 @@ end
 function panel_methods:hasChildren( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):HasChildren( )
 end
 
@@ -684,6 +809,8 @@ end
 function panel_methods:hasFocus( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):HasFocus( )
 end
 
@@ -691,6 +818,8 @@ end
 -- @return True if the panel or any children are focused
 function panel_methods:hasHierarchicalFocus( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):HasHierarchicalFocus( )
 end
@@ -701,12 +830,16 @@ function panel_methods:hasParent( panel )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( panel, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):HasParent( panel )
 end
 
 --- Makes a panel invisible
 function panel_methods:hide( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):Hide( )
 end
@@ -715,12 +848,16 @@ end
 function panel_methods:insertClickableTextEnd( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):InsertClickableTextEnd( )
 end
 
 --- Marks the start of a clickable RichText segment; End with panel:insertClickableTextEnd( )
 function panel_methods:insertClickableTextStart( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):InsertClickableTextStart( )
 end
@@ -731,6 +868,8 @@ end
 function panel_methods:insertColorChange( color )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( color, SF.Types[ "Colors" ] )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):InsertColorChange( color.r, color.g, color.b, color.a )
 end
@@ -746,6 +885,8 @@ function panel_methods:insertFade( sustain, length )
 	SF.CheckType( sustain, "number" )
 	SF.CheckType( length, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):InsertFade( sustain, length )
 end
 
@@ -754,6 +895,8 @@ end
 function panel_methods:invalidateChildren( recursive )
 	SF.CheckType( self, panel_metamethods )
 	if recursive then SF.CheckType( recursive, "boolean" ) end
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):InvalidateChildren( recursive or false )
 end
@@ -764,6 +907,8 @@ function panel_methods:invalidateLayout( layoutNow )
 	SF.CheckType( self, panel_metamethods )
 	if layoutNow then SF.CheckType( layoutNow, "boolean" ) end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):InvalidateLayout( layoutNow or false )
 end
 
@@ -772,6 +917,8 @@ end
 function panel_methods:invalidateLayout( layoutNow )
 	SF.CheckType( self, panel_metamethods )
 	if layoutNow then SF.CheckType( layoutNow, "boolean" ) end
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):InvalidateParent( layoutNow or false )
 end
@@ -783,6 +930,8 @@ function panel_methods:isChildHovered( depth )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( depth, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):IsChildHovered( depth )
 end
 
@@ -790,6 +939,8 @@ end
 -- @return True if the panel is able to be dragged by the user
 function panel_methods:isDraggable( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):IsDraggable( )
 end
@@ -799,6 +950,8 @@ end
 function panel_methods:isDragging( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):IsDragging( )
 end
 
@@ -806,6 +959,8 @@ end
 -- @return True if the cursor is over the panel
 function panel_methods:isHovered( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):IsHovered( )
 end
@@ -815,6 +970,8 @@ end
 function panel_methods:isKeyboardInputEnabled( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):IsKeyboardInputEnabled( )
 end
 
@@ -822,6 +979,8 @@ end
 -- @return True if the element is loading
 function panel_methods:isLoading( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):IsLoading( )
 end
@@ -831,6 +990,8 @@ end
 function panel_methods:isMarkedForDeletion( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):IsMarkedForDeletion( )
 end
 
@@ -838,6 +999,8 @@ end
 -- @return True if mouse input is enabled
 function panel_methods:isMouseInputEnabled( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):IsMouseInputEnabled( )
 end
@@ -847,6 +1010,8 @@ end
 function panel_methods:isMultiline( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):IsMultiline( )
 end
 
@@ -854,6 +1019,8 @@ end
 -- @return True if the panel is selectable
 function panel_methods:isSelectable( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):IsSelectable( )
 end
@@ -863,6 +1030,8 @@ end
 function panel_methods:isSelected( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):IsSelected( )
 end
 
@@ -870,6 +1039,8 @@ end
 -- @return True if the panel is a selection canvas
 function panel_methods:isSelectionCanvas( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):IsSelectionCanvas( )
 end
@@ -879,6 +1050,8 @@ end
 function panel_methods:isValid( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):IsValid( )
 end
 
@@ -887,12 +1060,16 @@ end
 function panel_methods:isVisible( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):IsVisible( )
 end
 
 --- Remove focus from the panel
 function panel_methods:killFocus( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):KillFocus( )
 end
@@ -905,6 +1082,8 @@ function panel_methods:lerpPositions( speed, easeOut )
 	SF.CheckType( speed, "number" )
 	if easeOut then SF.CheckType( easeOut, "boolean" ) else easeOut = false end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):LerpPositions( speed, easeOut )
 end
 
@@ -913,6 +1092,8 @@ end
 -- @return Y coordinate
 function panel_methods:localCursorPos( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):LocalCursorPos( )
 end
@@ -927,12 +1108,16 @@ function panel_methods:localToScreen( x, y )
 	SF.CheckType( x, "number" )
 	SF.CheckType( y, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):LocalToScreen( x, y )
 end
 
 --- Sets the focus to the panel and enables input
 function panel_methods:makePopup( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):MakePopup( )
 end
@@ -942,6 +1127,8 @@ end
 function panel_methods:mouseCapture( doCapture )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( doCapture, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):MouseCapture( doCapture )
 end
@@ -954,6 +1141,8 @@ function panel_methods:moveAbove( panel, offset )
 	SF.CheckType( panel, panel_metamethods )
 	SF.CheckType( offset, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):MoveAbove( panel, offset )
 end
 
@@ -964,6 +1153,8 @@ function panel_methods:moveBelow( panel, offset )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( panel, panel_metamethods )
 	SF.CheckType( offset, "number" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):MoveBelow( panel, offset )
 end
@@ -987,6 +1178,8 @@ function panel_methods:moveBy( x, y, time, delay, ease, callback )
 	if ease then SF.CheckType( ease, "number" ) else ease = -1 end
 	if callback then SF.CheckType( callback, "function" ) else callback = nil end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	local instance = SF.instance
 	punwrap( self ):MoveBy( x, y, time, delay, ease, function( animData, panel )
 		if callback then
@@ -1006,6 +1199,8 @@ function panel_methods:moveLeftOf( panel, offset )
 	SF.CheckType( panel, panel_metamethods )
 	SF.CheckType( offset, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):MoveLeftOf( punwrap( panel ), offset )
 end
 
@@ -1016,6 +1211,8 @@ function panel_methods:moveRightOf( panel, offset )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( panel, panel_metamethods )
 	SF.CheckType( offset, "number" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):MoveRightOf( punwrap( panel ), offset )
 end
@@ -1039,6 +1236,8 @@ function panel_methods:moveTo( x, y, time, delay, ease, callback )
 	if ease then SF.CheckType( ease, "number" ) else ease = -1 end
 	if callback then SF.CheckType( callback, "function" ) else callback = nil end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	local instance = SF.instance
 	punwrap( self ):MoveTo( x, y, time, delay, ease, function( animData, panel )
 		if callback then
@@ -1057,12 +1256,16 @@ function panel_methods:moveToAfter( panel )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( panel, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):MoveToAfter( punwrap( panel ) )
 end
 
 --- Moves the panel behind all other panels on screen.
 function panel_methods:moveToBack( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):MoveToBack( )
 end
@@ -1074,12 +1277,16 @@ function panel_methods:moveToBefore( panel )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( panel, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):MoveToBefore( punwrap( panel ) )
 end
 
 --- Moves the panel in front of all other panels on screen
 function panel_methods:moveToFront( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):MoveToFront( )
 end
@@ -1092,12 +1299,16 @@ function panel_methods:clip( clip )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( clip, "boolean" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):NoClipping( not clip )
 end
 
 --- Returns the number of children of the panel that are selected.
 function panel_methods:numSelectedChildren( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	return punwrap( self ):NumSelectedChildren( )
 end
@@ -1107,6 +1318,8 @@ end
 function panel_methods:openURL( URL )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( URL, "string" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):OpenURL( URL )
 end
@@ -1123,12 +1336,16 @@ function panel_methods:paintAt( x, y, w, h )
 	SF.CheckType( w, "number" )
 	SF.CheckType( h, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):PaintAt( x, y, w, h )
 end
 
 --- Paints the panel at its current position
 function panel_methods:paintManual( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):PaintManual( )
 end
@@ -1137,12 +1354,16 @@ end
 function panel_methods:parentToHUD( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):parentToHUD( )
 end
 
 --- Pastes the contents of the clipboard to the TextEntry
 function panel_methods:paste( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):paste( )
 end
@@ -1162,6 +1383,8 @@ function panel_methods:positionLabel( width, x, y, label, panel )
 	SF.CheckType( label, panel_metamethods )
 	SF.CheckType( panel, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):PositionLabel( width, x, y, label, panel )
 end
 
@@ -1173,6 +1396,8 @@ function panel_methods:postMessage( message, typ )
 	SF.CheckType( message, "string" )
 	SF.CheckType( typ, "string" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):PostMessage( message, typ )
 end
 
@@ -1180,12 +1405,16 @@ end
 function panel_methods:queue( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):Queue( )
 end
 
 --- Causes a SpawnIcon to rebuild its model image
 function panel_methods:rebuildSpawnIcon( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):RebuildSpawnIcon( )
 end
@@ -1201,6 +1430,8 @@ function panel_methods:rebuildSpawnIconEx( cam_pos, cam_ang, cam_fov, ent )
 	SF.CheckType( cam_ang, SF.Types[ "Angle" ] )
 	SF.CheckType( cam_fov, "number" )
 	SF.CheckType( ent, SF.Types[ "Entity" ] )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):RebuildSpawnIconEx( { cam_pos = SF.UnwrapObject( cam_pos ), cam_ang = SF.UnwrapObject( cam_ang ), cam_fov = cam_fov, ent = SF.UnwrapObject( ent ) } )
 end
@@ -1224,6 +1455,8 @@ function panel_methods:receiver( name, func, menu )
 	SF.CheckType( func, "function" )
 	SF.CheckType( menu, "table" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):Receiver( name, function( pnl, tbl, dropped, menuIndex, x, y )
 		local oldInstance = SF.instance
 		SF.instance = instance
@@ -1237,12 +1470,16 @@ end
 function panel_methods:remove( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):Remove( )
 end
 
 --- Attempts to obtain focus for this panel
 function panel_methods:requestFocus( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):RequestFocus( )
 end
@@ -1257,6 +1494,8 @@ function panel_methods:resetAllFades( hold, expiredOnly, newSustain )
 	SF.CheckType( expiredOnly, "boolean" )
 	SF.CheckType( newSustain, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):ResetAllFades( hold, expiredOnly, newSustain )
 end
 
@@ -1265,6 +1504,8 @@ end
 function panel_methods:runJavaScript( JavaScript )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( JavaScript, "string" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):RunJavaScript( JavaScript )
 end
@@ -1277,12 +1518,16 @@ function panel_methods:screenToLocal( x, y )
 	SF.CheckType( x, "number" )
 	SF.CheckType( y, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	return punwrap( self ):ScreenToLocal( x, y )
 end
 
 --- Selects all items within a panel or object.
 function panel_methods:selectAll( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SelectAll( )
 end
@@ -1291,12 +1536,16 @@ end
 function panel_methods:selectAllText( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SelectAllText( )
 end
 
 --- Deselects all items in a panel.
 function panel_methods:selectNone( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SelectNone( )
 end
@@ -1307,6 +1556,8 @@ function panel_methods:setAchievement( id )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( id, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetAchievement( id )
 end
 
@@ -1315,6 +1566,8 @@ end
 function panel_methods:setAllowNonAsciiCharacters( allowed )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( allowed, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetAllowNonAsciiCharacters( allowed )
 end
@@ -1325,6 +1578,8 @@ function panel_methods:setAlpha( alpha )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( alpha, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetAlpha( alpha )
 end
 
@@ -1333,6 +1588,8 @@ end
 function panel_methods:setAnimationEnabled( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetAnimationEnabled( enable )
 end
@@ -1343,6 +1600,8 @@ function panel_methods:setAutoDelete( autoDelete )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( autoDelete, "boolean" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetAutoDelete( autoDelete )
 end
 
@@ -1352,6 +1611,8 @@ function panel_methods:setBGColor( color )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( color, SF.Types[ "Color" ] )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetBGColor( SF.WrapObject( color ) )
 end
 
@@ -1360,6 +1621,8 @@ end
 function panel_methods:setCaretPos( offset )
     SF.CheckType( self, panel_metamethods )
     SF.CheckType( offset, "number" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
     punwrap( self ):SetCaretPos( offset )
 end
@@ -1371,6 +1634,8 @@ function panel_methods:setCommand( command )
     SF.CheckType( self, panel_metamethods )
     SF.CheckType( command, "string" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
     punwrap( self ):SetCommand( command )
 end
 
@@ -1379,6 +1644,8 @@ end
 function panel_methods:setContentAlignment( alignment )
     SF.CheckType( self, panel_metamethods )
     SF.CheckType( alignment, "number" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
     punwrap( self ):SetContentAlignment( alignment )
 end
@@ -1408,6 +1675,8 @@ function panel_methods:setCursor( cursor )
     SF.CheckType( self, panel_metamethods )
     SF.CheckType( cursor, "string" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
     punwrap( self ):SetCursor( cursor )
 end
 
@@ -1416,6 +1685,8 @@ end
 function panel_methods:setDragParent( parent )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( parent, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetDragParent( punwrap( parent ) )
 end
@@ -1426,6 +1697,8 @@ function panel_methods:setDrawOnTop( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetDrawOnTop( enable )
 end
 
@@ -1434,6 +1707,8 @@ end
 function panel_methods:setEnabled( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetEnabled( enable )
 end
@@ -1446,6 +1721,8 @@ function panel_methods:setShadow( distance, color )
 	SF.CheckType( distance, "number" )
 	SF.CheckType( color, SF.Types[ "Color" ] )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetExpensiveShadow( distance, SF.UnwrapObject( color ) )
 end
 
@@ -1454,6 +1731,8 @@ end
 function panel_methods:setFGColor( color )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( color, SF.Types[ "Color" ] )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetFGColor( SF.UnwrapObject( color ) )
 end
@@ -1464,6 +1743,8 @@ function panel_methods:setFont( font )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( font, "string" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetFontInternal( font )
 end
 
@@ -1472,6 +1753,8 @@ end
 function panel_methods:setHeight( height )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( height, "number" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetHeight( height )
 end
@@ -1482,6 +1765,8 @@ function panel_methods:setHTML( HTML )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( HTML, "string" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetHTML( HTML )
 end
 
@@ -1490,6 +1775,8 @@ end
 function panel_methods:setKeyboardInput( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetKeyboardInputEnabled( enable )
 end
@@ -1501,6 +1788,8 @@ function panel_methods:setMinimumSize( width, height )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( width, "number" )
 	SF.CheckType( height, "number" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetMinimumSize( width, height )
 end
@@ -1514,6 +1803,8 @@ function panel_methods:setModel( model, skin, bodygroups )
 	if model then SF.CheckType( skin, "number" ) end
 	if bodygroups then SF.CheckType( bodygroups, "string" ) end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetModel( model, skin or 0, bodygroups or "" )
 end
 
@@ -1522,6 +1813,8 @@ end
 function panel_methods:setMouseInput( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetMouseInputEnabled( enable )
 end
@@ -1532,6 +1825,8 @@ function panel_methods:setMultiline( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetMultiline( enable )
 end
 
@@ -1540,6 +1835,8 @@ end
 function panel_methods:setName( name )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( name, "string" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetName( name )
 end
@@ -1550,6 +1847,8 @@ function panel_methods:setPaintBackground( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):setPaintBackgroundEnabled( enable )
 end
 
@@ -1558,6 +1857,8 @@ end
 function panel_methods:setPaintBorder( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):setPaintBorderEnabled( enable )
 end
@@ -1568,6 +1869,8 @@ function panel_methods:setPaintedManually( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetPaintedManually( enable )
 end
 
@@ -1576,6 +1879,8 @@ end
 function panel_methods:setParent( parent )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( parent, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetParent( punwrap( parent ) )
 end
@@ -1589,6 +1894,8 @@ function panel_methods:setPlayer( player, size )
 	SF.CheckType( player, SF.Types[ "Player" ] )
 	SF.CheckType( size, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetPlayer( SF.UnwrapObject( player ), size )
 end
 
@@ -1597,6 +1904,8 @@ end
 function panel_methods:setPopupStayAtBack( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetPopupStayAtBack( enable )
 end
@@ -1609,6 +1918,8 @@ function panel_methods:setPos( x, y )
 	SF.CheckType( x, "number" )
 	SF.CheckType( y, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetPos( x, y )
 end
 
@@ -1617,6 +1928,8 @@ end
 function panel_methods:setRenderInScreenshots( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetRenderInScreenshots( enable )
 end
@@ -1627,6 +1940,8 @@ function panel_methods:setSelectable( enable)
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetSelectable( enable )
 end
 
@@ -1636,6 +1951,8 @@ function panel_methods:setSelected( selected )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( selected, "enable" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetSelected( selected )
 end
 
@@ -1644,6 +1961,8 @@ end
 function panel_methods:setSelectionCanvas( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetSelectionCanvas( enable )
 end
@@ -1656,6 +1975,8 @@ function panel_methods:setSize( width, height )
 	SF.CheckType( width, "number" )
 	SF.CheckType( height, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetSize( width, height )
 end
 
@@ -1665,6 +1986,8 @@ function panel_methods:setSkin( skin )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( skin, "string" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetSkin( skin )
 end
 
@@ -1673,6 +1996,8 @@ end
 function panel_methods:setSpawnIcon( icon )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( icon, "string" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetSpawnIcon( icon )
 end
@@ -1686,6 +2011,8 @@ function panel_methods:setSteamID( id, size )
 	SF.CheckType( id, "string" )
 	SF.CheckType( size, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetSteamID( id, size )
 end
 
@@ -1695,6 +2022,8 @@ function panel_methods:setTerm( delay )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( delay, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetTerm( delay )
 end
 
@@ -1703,6 +2032,8 @@ end
 function panel_methods:setText( text )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( text, "string" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetText( text )
 end
@@ -1715,12 +2046,16 @@ function panel_methods:setTextInsert( x, y )
 	SF.CheckType( x, "number" )
 	SF.CheckType( y, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetTextInsert( x, y )
 end
 
 --- Sets the height of a RichText element to accommodate the text inside
 function panel_methods:setToFullHeight( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetToFullHeight( )
 end
@@ -1731,6 +2066,8 @@ function panel_methods:setTooltip( tooltip )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( tooltip, "string" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetTooltip( tooltip )
 end
 
@@ -1739,6 +2076,8 @@ end
 function panel_methods:setTooltipPanel( tooltip )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( tooltip, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetTooltipPanel( punwrap( tooltip ) )
 end
@@ -1749,6 +2088,8 @@ function panel_methods:setURL( url )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( url, "string")
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetURL( url )
 end
 
@@ -1757,6 +2098,8 @@ end
 function panel_methods:setVerticalScrollbar( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetVerticalScrollbarEnabled( enable )
 end
@@ -1767,6 +2110,8 @@ function panel_methods:setVisible( visible )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( visible, "boolean" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetVisible( visible )
 end
 
@@ -1775,6 +2120,8 @@ end
 function panel_methods:setWidth( width )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( width, "number" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetWidth( width )
 end
@@ -1785,6 +2132,8 @@ function panel_methods:setWorldClicker( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetWorldClicker( enable )
 end
 
@@ -1793,6 +2142,8 @@ end
 function panel_methods:setWrap( enable )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( enable, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SetWrap( enable )
 end
@@ -1803,12 +2154,16 @@ function panel_methods:setZPos( z )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( z, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SetZPos( z )
 end
 
 --- Makes the panel visible
 function panel_methods:show()
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):Show()
 end
@@ -1831,6 +2186,8 @@ function panel_methods:sizeTo( width, height, duration, delay, ease, callback )
 	if delay then SF.CheckType( delay, "number" ) end
 	if callback then SF.CheckType( callback, "function" ) end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	local instance = SF.instance
 	punwrap( self ):SizeTo( width, height, duration, delay, ease, function( animData, panel )
 		if callback then
@@ -1850,12 +2207,16 @@ function panel_methods:sizeToChildren ( width, height )
 	SF.CheckType( width, "number" )
 	SF.CheckType( height, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SizeToChildren( width, height )
 end
 
 --- Resizes the panel so that it's width and height fit all of the child controls inside.
 function panel_methods:sizeToContents( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SizeToContents( )
 end
@@ -1866,6 +2227,8 @@ function panel_methods:sizeToContentsX( offset )
 	SF.CheckType( self, panel_metamethods )
 	if offset then SF.CheckType( offset, "number" ) end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SizeToContentsX( offset or 0)
 end
 
@@ -1874,6 +2237,8 @@ end
 function panel_methods:sizeToContentsX( offset )
 	SF.CheckType( self, panel_metamethods )
 	if offset then SF.CheckType( offset, "number" ) end
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):SizeToContentsY( offset or 0)
 end
@@ -1884,6 +2249,8 @@ function panel_methods:slideDown( duration )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( duration, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SlideDown( duration )
 end
 
@@ -1893,6 +2260,8 @@ function panel_methods:slideUp( duration )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( duration, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):SlideUp( duration )
 end
 
@@ -1900,12 +2269,16 @@ end
 function panel_methods:startBoxSelection( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):StartBoxSelection( )
 end
 
 --- Stops all panel animations by clearing its animation list. This also clears all delayed animations.
 function panel_methods:stop( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):Stop( )
 end
@@ -1918,6 +2291,8 @@ function panel_methods:stretchBottomTo( panel, offset )
 	SF.CheckType( panel, panel_metamethods )
 	if offset then SF.CheckType( offset, "number" ) end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):StretchBottomTo( punwrap( panel ), offset or 0 )
 end
 
@@ -1928,6 +2303,8 @@ function panel_methods:stretchRightTo( panel, offset )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( panel, panel_metamethods )
 	if offset then SF.CheckType( offset, "number" ) end
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):StretchRightTo( punwrap( panel ), offset or 0 )
 end
@@ -1944,12 +2321,16 @@ function panel_methods:stretchToParent( left, top, right, bottom )
 	SF.CheckType( right, "number" )
 	SF.CheckType( right, "number" )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):StretchToParent( left, top, right, bottom )
 end
 
 --- Toggles the selected state of a selectable panel
 function panel_methods:toggleSelection( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):ToggleSelection( )
 end
@@ -1958,12 +2339,16 @@ end
 function panel_methods:toggleVisible( )
 	SF.CheckType( self, panel_metamethods )
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	punwrap( self ):ToggleVisible( )
 end
 
 --- Recursively deselects this panel object and all of its children.
 function panel_methods:deselectAll( )
 	SF.CheckType( self, panel_metamethods )
+
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	punwrap( self ):UnselectAdd( )
 end
