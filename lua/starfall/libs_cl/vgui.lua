@@ -1,6 +1,6 @@
 local vgui_library, _ = SF.Libraries.Register( "vgui" )
 
-local pwrap, punwrap = SF.Panel.wrap, SF.Panel.unwrap
+local punwrap = SF.Panel.unwrap
 local plyCount = SF.Panel.plyCount
 
 function vgui_library.create( classname, parent, name )
@@ -11,15 +11,17 @@ function vgui_library.create( classname, parent, name )
 	local instance = SF.instance
 	local paneldata = instance.data.panels
 
-	local panel = vgui.Create( classname, punwrap( parent ), name )
+	if SF.Panel[ classname ] then
+		local panel = vgui.Create( classname, punwrap( parent ), name )
 
-	if panel and panel:IsValid() then
-		panel = pwrap( panel )
-		paneldata.panels[ panel ] = true
-		paneldata.count = paneldata.count + 1
+		if panel and panel:IsValid() then
+			panel = SF.Panel[ classname ].wrap( panel )
+			paneldata.panels[ panel ] = true
+			paneldata.count = paneldata.count + 1
 
-		plyCount[ instance.player ] = plyCount[ instance.player ] + 1
+			plyCount[ instance.player ] = plyCount[ instance.player ] + 1
 
-		return panel
+			return panel
+		end
 	end
 end
