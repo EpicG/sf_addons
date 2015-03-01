@@ -6,8 +6,9 @@ SF.Panel = {}
 local panel_methods, panel_metamethods = SF.Typedef( "Panel" )
 local pwrap, punwrap = SF.CreateWrapper( panel_metamethods, true, true, debug.getregistry().Panel )
 
-SF.Panel.Methods = panel_methods
-SF.Panel.Metatable = panel_metamethods
+SF.Panel.Panel = {}
+SF.Panel.Panel.Methods = panel_methods
+SF.Panel.Panel.Metatable = panel_metamethods
 
 SF.Panel.wrap = pwrap
 SF.Panel.unwrap = punwrap
@@ -20,13 +21,88 @@ end
 do
 	local P = SF.Permissions
 	P.registerPrivilege( "panel.access", "Panel Access", "Allows the user to have access to panels" )
-	incPanel( "dframe" )
+
+	incPanel( "achievementicon" ) --Panel
+	incPanel( "avatarimage" ) --Panel
+	incPanel( "contextbase" ) --Panel
+	incPanel( "dcollapsiblecategory" ) --Panel
+		incPanel( "dform" ) --DCollapsibleCategory
+	incPanel( "ddrawer" ) --Panel
+	incPanel( "editablepanel" ) --Before DFrame
+	incPanel( "dframe" ) --Panel
+		incPanel( "iconeditor" ) --DFrame
+	incPanel( "dgrid" ) --Panel
+	incPanel( "dhtmlcontrols" ) --Panel
+	incPanel( "dkillicon" ) --Panel
+	incPanel( "dnotify" ) --Panel
+	incPanel( "dnumslider" ) --Panel
+	incPanel( "dpanel" ) --Panel
+		incPanel( "dalphabar" ) --DPanel
+		incPanel( "dbubblecontainer" ) --DPanel
+		incPanel( "dcolormixer" ) --DPanel
+		incPanel( "ddragbase" ) --DPanel
+			incPanel( "diconlayout" ) --DDragBase
+				incPanel( "dcolorpalette" ) --DIconLayout
+			incPanel( "dlistlayout" ) --DDragBase
+			incPanel( "dtilelayout" ) --DDragBase
+		incPanel( "dfilebrowser" ) --DPanel
+		incPanel( "dhorizontaldivider" ) --DPanel
+		incPanel( "dimage" ) --DPanel
+		incPanel( "dlistview" ) --DPanel
+		incPanel( "dlistview_column" ) --DPanel
+		incPanel( "dmenubar" ) --DPanel
+		incPanel( "dnumberscratch" ) --DPanel
+		incPanel( "dpropertysheet" ) --DPanel
+			incPanel( "dcolorcombo" ) --DPropertySheet
+		incPanel( "drgbpicker" ) --DPanel
+		incPanel( "dscrollpanel" ) --DPanel
+			incPanel( "dcategorylist" ) --DScrollPanel
+			incPanel( "diconbrowser" ) --DScrollPanel
+			incPanel( "dmenu" ) --DScrollPanel
+			incPanel( "dtree" ) --DScrollPanel
+		incPanel( "dshape" ) --DPanel
+		incPanel( "dslider" ) --DPanel
+			incPanel( "dcolorcube" ) --DSlider
+		incPanel( "dsprite" ) --DPanel
+	incPanel( "dprogress" ) --Panel
+	incPanel( "dproperties" ) --Panel
+	incPanel( "dproperty_combo" ) --Panel?
+	incPanel( "dvscrollbar" ) --Panel
+	incPanel( "frame" ) --Panel
+	incPanel( "html" ) --Panel
+	incPanel( "label" ) --Panel
+		incPanel( "dlabel" ) --Label
+			incPanel( "button" ) --DLabel
+				incPanel( "dbutton" ) --Button
+					incPanel( "contenticon" ) --DButton
+					incPanel( "dbinder" ) --DButton
+					incPanel( "dcheckbox" ) --DButton
+					incPanel( "dcombobox" ) --DButton
+					incPanel( "dimagebutton" ) --DButton
+					incPanel( "dmodelpanel" ) --DButton
+						incPanel( "dadjustablemodelpanel" ) --DModelPanel
+					incPanel( "dtab" ) --DButton
+					incPanel( "spawnicon" ) --DButton
+				incPanel( "material" ) --Button
+			incPanel( "dcheckboxlabel" ) --DLabel
+			incPanel( "dlabeleditable" ) --DLabel
+			incPanel( "dlabelurl" ) --DLabel
+	incPanel( "dcolorbutton" ) --DLabel
+	incPanel( "richtext" ) --Panel
+	incPanel( "slider" ) --Panel
+	incPanel( "tgaimage" ) --Panel
+	incPanel( "textentry" ) --Panel
+		incPanel( "dtextentry" ) --TextEntry
+			incPanel( "dnumberwang" ) --DTextEntry
+	incPanel( "urllabel" ) --Panel
+	incPanel( "dhtml" ) --Awesomium
 end
 
 function panel_metamethods.__newindex( t, k, v )
 	if type( v ) == "function" then
 		local instance = SF.instance
-		punwrap( t )[ k ] = function( )
+		print( k, k:gsub( "^%l", string.upper ) )
+		punwrap( t )[ k:gsub( "^%l", string.upper ) ] = function( )
 			local oldInstance = SF.instance
 			SF.instance = instance
 			v( )
