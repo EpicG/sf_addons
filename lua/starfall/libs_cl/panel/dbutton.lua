@@ -29,3 +29,23 @@ function dbutton_metamethods.__newindex( t, k, v )
 		t[ k ] = v
 	end
 end
+
+function dbutton_methods:isDown( )
+	SF.CheckType( self, dbutton_metamethods )
+
+	return punwrap( self ):IsDown( )
+end
+
+function dbutton_methods:setEnabled( enable )
+	SF.CheckType( self, dbutton_metamethods )
+	SF.CheckType( enable, "boolean" )
+
+	punwrap( self ):SetEnabled( enable )
+end
+
+function dbutton_methods:setImage( image )
+	SF.CheckType( self, dbutton_metamethods )
+	SF.CheckType( image, "string" )
+
+	punwrap( self ):SetImage( image )
+end
