@@ -8,6 +8,8 @@ function vgui_library.create( classname, parent, name )
     if parent then SF.CheckType( parent, SF.Types[ "Panel" ] ) end
     if name then SF.CheckType( name, "string" ) end
 
+	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) return end
+
 	local instance = SF.instance
 	local paneldata = instance.data.panels
 
