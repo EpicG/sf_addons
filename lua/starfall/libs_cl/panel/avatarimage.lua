@@ -1,20 +1,20 @@
 SF.Panel.AvatarImage = {}
 
-local avatarImg_methods, avatarImg_metamethods = SF.Typedef( "Panel.AvatarImage", SF.Panel.Panel.Metatable )
+local this_methods, this_metamethods = SF.Typedef( "Panel.AvatarImage", SF.Panel.Panel.Metatable )
 
 local punwrap = SF.Panel.unwrap
 
 local function pwrap( object )
 	object = SF.Panel.wrap( object )
-	debug.setmetatable( object, avatarImg_metamethods )
+	debug.setmetatable( object, this_metamethods )
 	return object
 end
 
 SF.Panel.AvatarImage.wrap = pwrap
 SF.Panel.AvatarImage.unwrap = punwrap
 
-SF.Panel.AvatarImage.Methods = avatarImg_methods
-SF.Panel.AvatarImage.Metatable = avatarImg_metamethods
+SF.Panel.AvatarImage.Methods = this_methods
+SF.Panel.AvatarImage.Metatable = this_metamethods
 
 local validSize = {
 	"16" = true,
@@ -29,8 +29,8 @@ local validSize = {
 -- @param player The player to use as an avatar
 -- @param size the size of avatar to use
 -- Sizes can be: 16, 32, 64, 84, 128, and 184
-function avatarImg_methods:setPlayer( player, size )
-	SF.CheckType( self, avatarImg_metamethods )
+function this_methods:setPlayer( player, size )
+	SF.CheckType( self, this_metamethods )
 	SF.CheckType( player, SF.Types[ "Player" ] )
 	SF.CheckType( size, "number" )
 
@@ -43,8 +43,8 @@ end
 -- @param id The 64bit SteamID
 -- @param size the size of avatar to use
 -- Sizes can be: 16, 32, 64, 84, 128, and 184
-function panel_methods:setSteamID( id, size )
-	SF.CheckType( self, panel_metamethods )
+function this_methods:setSteamID( id, size )
+	SF.CheckType( self, this_metamethods )
 	SF.CheckType( id, "string" )
 	SF.CheckType( size, "number" )
 
