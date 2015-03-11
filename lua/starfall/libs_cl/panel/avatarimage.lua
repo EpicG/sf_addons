@@ -17,12 +17,12 @@ SF.Panel.AvatarImage.Methods = this_methods
 SF.Panel.AvatarImage.Metatable = this_metamethods
 
 local validSize = {
-	"16" = true,
-	"32" = true,
-	"64" = true,
-	"84" = true,
-	"128" = true,
-	"184" = true
+	[ "16" ] = true,
+	[ "32" ] = true,
+	[ "64" ] = true,
+	[ "84" ] = true,
+	[ "128" ] = true,
+	[ "184" ] = true
 }
 
 --- Sets the avatar for the panel
