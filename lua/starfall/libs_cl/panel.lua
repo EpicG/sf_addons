@@ -16,7 +16,7 @@ SF.Panel.Panel.Metatable = panel_metamethods
 
 SF.Panel.Panel.wrap = pwrap
 SF.Panel.wrap = function( panel )
-	ret = SF.Panel[ panel:GetClassName( ) ] and SF.Panel[ panel:GetClassName( ) ].wrap( panel )
+	return SF.Panel[ panel:GetClassName( ) ] and SF.Panel[ panel:GetClassName( ) ].wrap( panel )
 end
 
 SF.Panel.unwrap = punwrap
@@ -32,7 +32,7 @@ do
 
 	incPanel( "achievementicon" ) --Panel
 	incPanel( "avatarimage" ) --Panel
-	incPanel( "contextbase" ) --Panel
+	--incPanel( "contextbase" ) --Panel
 	incPanel( "dcollapsiblecategory" ) --Panel
 		incPanel( "dform" ) --DCollapsibleCategory
 	incPanel( "ddrawer" ) --Panel
@@ -135,7 +135,7 @@ local insts = SF.Panel.insts
 SF.Panel.plyCount = {}
 local plyCount = SF.Panel.plyCount
 
-SF.Libraries.AddHook("initialize",function(inst)
+SF.Libraries.AddHook("initialize",function( inst )
 	inst.data.panels = {
 		panels = {},
 		count = 0
@@ -145,7 +145,7 @@ SF.Libraries.AddHook("initialize",function(inst)
 	plyCount[ inst.player ] = plyCount[ inst.player ] or inst.data.panels.count
 end)
 
-SF.Libraries.AddHook("deinitialize", function(inst)
+SF.Libraries.AddHook("deinitialize", function( inst )
 	local panels = inst.data.panels.panels
 	for panel, _ in pairs( panels ) do
 		if IsValid( punwrap( panel ) ) then
@@ -1651,18 +1651,6 @@ function panel_methods:setParent( parent )
 	punwrap( self ):SetParent( punwrap( parent ) )
 end
 
---- Sets the avatar for an AvatarImage panel
--- @param player The player to use as an avatar
--- @param size the size of avatar to use
--- Sizes can be: 16, 32, 64, 84, 128, and 184
-function panel_methods:setPlayer( player, size )
-	SF.CheckType( self, panel_metamethods )
-	SF.CheckType( player, SF.Types[ "Player" ] )
-	SF.CheckType( size, "number" )
-
-	punwrap( self ):SetPlayer( SF.UnwrapObject( player ), size )
-end
-
 --- If this panel object has been made a popup with Panel:MakePopup, this method will prevent it from drawing in front of other panels when it receives input focus.
 -- @param enable True to keep the panel at the back when focused
 function panel_methods:setPopupStayAtBack( enable )
@@ -1746,18 +1734,6 @@ function panel_methods:setSpawnIcon( icon )
 	SF.CheckType( icon, "string" )
 
 	punwrap( self ):SetSpawnIcon( icon )
-end
-
---- Sets the avatar used by AvatarImage via SteamID
--- @param id The 64bit SteamID
--- @param size the size of avatar to use
--- Sizes can be: 16, 32, 64, 84, 128, and 184
-function panel_methods:setSteamID( id, size )
-	SF.CheckType( self, panel_metamethods )
-	SF.CheckType( id, "string" )
-	SF.CheckType( size, "number" )
-
-	punwrap( self ):SetSteamID( id, size )
 end
 
 --- Removes the panel after delay seconds have passed, will not work if panel:AnimationThink is overridden

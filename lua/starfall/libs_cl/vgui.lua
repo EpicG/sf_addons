@@ -17,11 +17,7 @@ function vgui_library.create( classname, parent, name )
 		local panel = vgui.Create( classname, punwrap( parent ), name )
 
 		if panel and panel:IsValid() then
-			if SF.Panel[ classname ].wrap then
-				panel = SF.Panel[ classname ].wrap( panel )
-			else
-				panel = SF.Panel.wrap( panel )
-			end
+			panel = SF.Panel.wrap( panel )
 
 			paneldata.panels[ panel ] = true
 			paneldata.count = paneldata.count + 1
