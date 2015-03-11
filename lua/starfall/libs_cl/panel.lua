@@ -75,6 +75,7 @@ do
 	incPanel( "dprogress" ) --Panel
 	incPanel( "dproperties" ) --Panel
 	incPanel( "dproperty_combo" ) --Panel?
+	incPanel( "dtree_node" ) --Panel
 	incPanel( "dvscrollbar" ) --Panel
 	incPanel( "frame" ) --Panel
 	incPanel( "html" ) --Panel
