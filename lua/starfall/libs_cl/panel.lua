@@ -15,10 +15,15 @@ SF.Panel.Panel.Methods = panel_methods
 SF.Panel.Panel.Metatable = panel_metamethods
 
 SF.Panel.Panel.wrap = pwrap
-SF.Panel.wrap = function( panel )
-	return SF.Panel[ panel:GetClassName( ) ] and SF.Panel[ panel:GetClassName( ) ].wrap( panel )
+SF.Panel.wrap = function( panel, class )
+	if class ~= nil then
+		return SF.Panel[ class ].wrap( panel )
+	else
+		return SF.Panel.Panel.wrap( panel )
+	end
 end
 
+SF.Panel.Panel.unwrap = punwrap
 SF.Panel.unwrap = punwrap
 
 local function incPanel( name )

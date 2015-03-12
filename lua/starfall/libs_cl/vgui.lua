@@ -17,14 +17,18 @@ function vgui_library.create( classname, parent, name )
 		local panel = vgui.Create( classname, punwrap( parent ), name )
 
 		if panel and panel:IsValid() then
-			panel = SF.Panel.wrap( panel )
+			local wrappedPanel = SF.Panel.wrap( panel, classname )
 
-			paneldata.panels[ panel ] = true
-			paneldata.count = paneldata.count + 1
+			if wrappedPanel then
+				paneldata.panels[ wrappedPanel ] = true
+				paneldata.count = paneldata.count + 1
 
-			plyCount[ instance.player ] = plyCount[ instance.player ] + 1
+				plyCount[ instance.player ] = plyCount[ instance.player ] + 1
 
-			return panel
+				return wrappedPanel
+			else
+				panel:Remove( )
+			end
 		end
 	end
 end
