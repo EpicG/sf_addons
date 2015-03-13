@@ -39,6 +39,7 @@ function this_methods:setStartHeight( height )
 end
 
 --- Gets the start height of the content
+--@return The start height of the content
 function this_methods:getStartHeight( )
 	SF.CheckType( self, this_metamethods )
 
@@ -55,6 +56,7 @@ function this_methods:setAnimTime( time )
 end
 
 --- Gets the time it takes for the panel to open
+--@return The time in seconds
 function this_methods:getAnimTime( )
 	SF.CheckType( self, this_metamethods )
 
@@ -71,6 +73,7 @@ function this_methods:setDrawBackground( draw )
 end
 
 --- Gets whether the background is drawn
+--@return True if the background is drawn
 function this_methods:getDrawBackground( )
 	SF.CheckType( self, this_metamethods )
 
@@ -87,6 +90,7 @@ function this_methods:setPadding( padding )
 end
 
 --- Gets the padding of the panel
+--@return The padding of the panel
 function this_methods:getPadding( )
 	SF.CheckType( self, this_metamethods )
 
