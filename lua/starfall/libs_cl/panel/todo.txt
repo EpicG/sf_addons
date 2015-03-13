@@ -1,7 +1,3 @@
---TODO: contextbase
-	--TODO: Documentation
---TODO: dcollapsiblecategory
-	--TODO: Documentation
 --TODO: dform
 	--TODO: Documentation
 --TODO: ddrawer
@@ -144,3 +140,14 @@
 	--TODO: Documentation
 --TODO: dhtml
 	--TODO: Documentation
+
+--TODO: figure out how to handle the following:
+	--TODO: contextbase
+		--TODO: Documentation
+	--TODO: dcollapsiblecategory
+		--TODO: setList
+		--TODO: getList
+		--TODO: Documentation
+			--TODO: setExpanded
+			--TODO: getExpanded
+			--TODO: doExpansion
