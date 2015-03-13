@@ -16,12 +16,20 @@ local ents_metatable = SF.Entities.Metatable
 local wrap, unwrap = SF.Entities.Wrap, SF.Entities.Unwrap
 local vwrap, vunwrap = SF.WrapObject, SF.UnwrapObject
 
+do
+	local P = SF.Permissions
+	P.registerPrivilege( "constraint.any", "Constrain", "Allows the user to create constraints" )
+end
+
 --- Creates a table of entities recursively constrained to an entity
 -- @param ent Base entity of search
 -- @param default Default table to return
 -- @return Table of constrained entities
 function constraint_lib.getAllConstrainedEntities( ent, default )
 	SF.CheckType( ent, ents_metatable )
+
+	if not SF.Permissions.check( SF.instance.player, ent, "constraint.any" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	ent = unwrap( ent )
 
 	if default ~= nil then
@@ -52,6 +60,9 @@ end
 -- @return Table of entity constraints
 function constraint_lib.getTable( ent )
 	SF.CheckType( ent, ents_metatable )
+
+	if not SF.Permissions.check( SF.instance.player, ent, "constraint.any" ) then SF.throw( "Insufficient permissions", 2 ) end
+
 	ent = unwrap( ent )
 
 	local valid = SF.Entities.IsValid
@@ -88,6 +99,8 @@ function constraint_lib.weld( enta, entb, bonea, boneb, forcelimit, nocollide )
 	SF.CheckType( boneb, "number" )
 	SF.CheckType( forcelimit, "number" )
 	SF.CheckType( nocollide, "boolean" )
+
+	if not SF.Permissions.check( SF.instance.player, ent, "constraint.any" ) then SF.throw( "Insufficient permissions", 2 ) end
 
 	enta = unwrap( enta )
 	entb = unwrap( entb )
