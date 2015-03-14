@@ -115,7 +115,6 @@ end
 function panel_metamethods.__newindex( t, k, v )
 	if type( v ) == "function" then
 		local instance = SF.instance
-		print( k, k:gsub( "^%l", string.upper ) )
 		punwrap( t )[ k:gsub( "^%l", string.upper ) ] = function( ... )
 			local args = { ... }
 			for k, v in pairs( args ) do
