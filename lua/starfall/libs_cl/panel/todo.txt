@@ -1,5 +1,3 @@
---TODO: dpanel
-	--TODO: Documentation
 --TODO: dalphabar
 	--TODO: Documentation
 --TODO: dbubblecontainer
@@ -150,3 +148,4 @@
 	--TODO: dnumslider
 		--TODO: the remainder of the functions ( no existing documentation )
 		--TODO: Documentation
+	--TODO: dpanel documentation
