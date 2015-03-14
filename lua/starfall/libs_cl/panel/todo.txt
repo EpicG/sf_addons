@@ -1,5 +1,3 @@
---TODO: dhtmlcontrols
-	--TODO: Documentation
 --TODO: dkillicon
 	--TODO: Documentation
 --TODO: dnotify
