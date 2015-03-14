@@ -1,5 +1,3 @@
---TODO: editablepanel
-	--TODO: Documentation
 --TODO: dframe
 	--TODO: Documentation
 --TODO: iconeditor
