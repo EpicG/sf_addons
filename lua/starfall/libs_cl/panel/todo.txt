@@ -1,5 +1,3 @@
---TODO: dgrid
-	--TODO: Documentation
 --TODO: dhtmlcontrols
 	--TODO: Documentation
 --TODO: dkillicon
