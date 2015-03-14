@@ -1,5 +1,3 @@
---TODO: dform
-	--TODO: Documentation
 --TODO: ddrawer
 	--TODO: Documentation
 --TODO: editablepanel
@@ -151,3 +149,16 @@
 			--TODO: setExpanded
 			--TODO: getExpanded
 			--TODO: doExpansion
+	--TODO: dform
+		--Require convar handling
+			--TODO: textEntry
+			--TODO: comboBox
+			--TODO: numberWang
+			--TODO: numSlider
+			--TODO: checkBox
+			--TODO: button
+		--Need to be written
+			--TODO: panelSelect
+			--TODO: listBox
+		--TODO: Documentation
+			--TODO: addItem
