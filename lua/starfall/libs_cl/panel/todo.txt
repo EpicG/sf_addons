@@ -1,5 +1,3 @@
---TODO: ddrawer
-	--TODO: Documentation
 --TODO: editablepanel
 	--TODO: Documentation
 --TODO: dframe
