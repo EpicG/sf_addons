@@ -1,5 +1,3 @@
---TODO: iconeditor
-	--TODO: Documentation
 --TODO: dgrid
 	--TODO: Documentation
 --TODO: dhtmlcontrols
