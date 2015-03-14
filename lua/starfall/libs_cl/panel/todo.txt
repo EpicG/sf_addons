@@ -1,5 +1,3 @@
---TODO: dnumslider
-	--TODO: Documentation
 --TODO: dpanel
 	--TODO: Documentation
 --TODO: dalphabar
@@ -148,4 +146,7 @@
 			--TODO: addItem
 	--TODO: dnotify
 		--TODO: getItems
+		--TODO: Documentation
+	--TODO: dnumslider
+		--TODO: the remainder of the functions ( no existing documentation )
 		--TODO: Documentation
