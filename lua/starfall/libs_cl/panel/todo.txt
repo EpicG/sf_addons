@@ -1,5 +1,3 @@
---TODO: dframe
-	--TODO: Documentation
 --TODO: iconeditor
 	--TODO: Documentation
 --TODO: dgrid
