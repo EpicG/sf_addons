@@ -26,8 +26,6 @@
 	--TODO: Documentation
 --TODO: drgbpicker
 	--TODO: Documentation
---TODO: dscrollpanel
-	--TODO: Documentation
 --TODO: dcategorylist
 	--TODO: Documentation
 --TODO: diconbrowser
@@ -145,3 +143,4 @@
 	--TODO: dcolormixer documentation
 	--TODO: ddragbase
 		--TODO: Documentation
+	--TODO: dscrollpanel documentation
