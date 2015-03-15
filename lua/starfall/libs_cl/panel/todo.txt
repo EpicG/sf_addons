@@ -1,5 +1,3 @@
---TODO: dalphabar
-	--TODO: Documentation
 --TODO: dbubblecontainer
 	--TODO: Documentation
 --TODO: dcolormixer
@@ -149,3 +147,4 @@
 		--TODO: the remainder of the functions ( no existing documentation )
 		--TODO: Documentation
 	--TODO: dpanel documentation
+	--TODO: dalphabar documentation
