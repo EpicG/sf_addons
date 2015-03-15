@@ -1,5 +1,3 @@
---TODO: dcolormixer
-	--TODO: Documentation
 --TODO: ddragbase
 	--TODO: Documentation
 --TODO: diconlayout
@@ -146,3 +144,4 @@
 		--TODO: Documentation
 	--TODO: dpanel documentation
 	--TODO: dalphabar documentation
+	--TODO: dcolormixer documentation
