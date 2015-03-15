@@ -14,4 +14,4 @@ SF.Panel.DCategoryList.wrap = pwrap
 SF.Panel.DCategoryList.unwrap = punwrap
 
 SF.Panel.DCategoryList.Methods = dcategoryList_methods
-SF.Panel.BIGNAME.Metatable = dcategoryList_metamethods
+SF.Panel.DCategoryList.Metatable = dcategoryList_metamethods
