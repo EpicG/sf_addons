@@ -32,8 +32,6 @@
 	--TODO: Documentation
 --TODO: dmenu
 	--TODO: Documentation
---TODO: dtree
-	--TODO: Documentation
 --TODO: dshape
 	--TODO: Documentation
 --TODO: dslider
@@ -144,3 +142,4 @@
 	--TODO: ddragbase
 		--TODO: Documentation
 	--TODO: dscrollpanel documentation
+	--TODO: dtree documentation
