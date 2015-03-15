@@ -92,9 +92,9 @@ end
 function this_methods:addNode( name, icon )
 	SF.CheckType( self, this_metamethods )
 	SF.CheckType( name, "string" )
-	SF.CheckType( icon, "string" )
+	if icon then SF.CheckType( icon, "string" ) end
 
-	return SF.Panel.wrap( punwrap( self ):AddNode( name, icon ), "DTree_Node" )
+	return SF.Panel.wrap( punwrap( self ):AddNode( name, icon ), "DTree_node" )
 end
 
 --Does nothing to override the DScrollPanel function
