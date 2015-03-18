@@ -10,6 +10,8 @@ local function pwrap( object )
 	return object
 end
 
+this_metamethods.__newindex = SF.Panel.Panel.Metatable.__newindex
+
 SF.Panel.DColorMixer.wrap = pwrap
 SF.Panel.DColorMixer.unwrap = punwrap
 

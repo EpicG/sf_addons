@@ -10,6 +10,8 @@ local function pwrap( object )
 	return object
 end
 
+this_metamethods.__newindex = SF.Panel.Panel.Metatable.__newindex
+
 SF.Panel.DTab.wrap = pwrap
 SF.Panel.DTab.unwrap = punwrap
 

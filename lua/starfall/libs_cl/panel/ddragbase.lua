@@ -10,6 +10,8 @@ local function pwrap( object )
 	return object
 end
 
+this_metamethods.__newindex = SF.Panel.Panel.Metatable.__newindex
+
 SF.Panel.DDragBase.wrap = pwrap
 SF.Panel.DDragBase.unwrap = punwrap
 

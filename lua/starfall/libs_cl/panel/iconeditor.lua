@@ -10,12 +10,13 @@ local function pwrap( object )
 	return object
 end
 
+this_metamethods.__newindex = SF.Panel.Panel.Metatable.__newindex
+
 SF.Panel.IconEditor.wrap = pwrap
 SF.Panel.IconEditor.unwrap = punwrap
 
 SF.Panel.IconEditor.Methods = this_methods
 SF.Panel.IconEditor.Metatable = this_metamethods
-
 --- Applies the top-down view to the camera for the model
 function this_methods:aboveLayout( )
 	SF.CheckType( self, this_metamethods )

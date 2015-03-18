@@ -1,50 +1,44 @@
 SF.Panel.DButton = {}
 
-local dbutton_methods, dbutton_metamethods = SF.Typedef( "Panel.DButton", SF.Panel.DLabel.Metatable )
+local this_methods, this_metamethods = SF.Typedef( "Panel.DButton", SF.Panel.DLabel.Metatable )
 
 local punwrap = SF.Panel.unwrap
 
 local function pwrap( object )
 	object = SF.Panel.wrap( object )
-	debug.setmetatable( object, dbutton_metamethods )
+	debug.setmetatable( object, this_metamethods )
 	return object
 end
+
+this_metamethods.__newindex = SF.Panel.Panel.Metatable.__newindex
 
 SF.Panel.DButton.wrap = pwrap
 SF.Panel.DButton.unwrap = punwrap
 
-SF.Panel.DButton.Methods = dbutton_methods
-SF.Panel.DButton.Metatable = dbutton_metamethods
+SF.Panel.DButton.Methods = this_methods
+SF.Panel.DButton.Metatable = this_metamethods
 
-function dbutton_metamethods.__newindex( t, k, v )
-	if type( v ) == "function" then
-		local instance = SF.instance
-		punwrap( t )[ k:sub( 1, 1 ):upper( ) .. k:sub( 2 ) ] = function( )
-			local oldInstance = SF.instance
-			SF.instance = instance
-			v( )
-			SF.instance = oldInstance
-		end
-	else
-		t[ k ] = v
-	end
+function this_methods:isDown( )
+	SF.CheckType( self, this_metamethods )
+
+	return punwrap( self ).Depressed
 end
 
-function dbutton_methods:isDown( )
-	SF.CheckType( self, dbutton_metamethods )
-
-	return punwrap( self ):IsDown( )
-end
-
-function dbutton_methods:setEnabled( enable )
-	SF.CheckType( self, dbutton_metamethods )
+function this_methods:setEnabled( enable )
+	SF.CheckType( self, this_metamethods )
 	SF.CheckType( enable, "boolean" )
 
-	punwrap( self ):SetEnabled( enable )
+	punwrap( self ).m_bDisabled = not enable
 end
 
-function dbutton_methods:setImage( image )
-	SF.CheckType( self, dbutton_metamethods )
+function this_methods:getEnabled( )
+	SF.CheckType( self, this_metamethods )
+
+	return punwrap( self ).m_bDisabled
+end
+
+function this_methods:setImage( image )
+	SF.CheckType( self, this_metamethods )
 	SF.CheckType( image, "string" )
 
 	punwrap( self ):SetImage( image )

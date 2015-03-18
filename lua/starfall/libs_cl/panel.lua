@@ -11,8 +11,6 @@ local panel_methods, panel_metamethods = SF.Typedef( "Panel.Panel" )
 local pwrap, punwrap = SF.CreateWrapper( panel_metamethods, true, true, debug.getregistry().Panel )
 
 SF.Panel.Panel = {}
-SF.Panel.Panel.Methods = panel_methods
-SF.Panel.Panel.Metatable = panel_metamethods
 
 SF.Panel.Panel.wrap = pwrap
 SF.Panel.wrap = function( panel, class )
@@ -22,6 +20,33 @@ SF.Panel.wrap = function( panel, class )
 		return SF.Panel.Panel.wrap( panel )
 	end
 end
+
+function panel_metamethods.__newindex( t, k, v )
+	if type( v ) == "function" then
+		if punwrap( t )[ k:gsub( "^%l", string.upper ) ] ~= nil then
+			local instance = SF.instance
+			punwrap( t )[ k:gsub( "^%l", string.upper ) ] = function( ... )
+				local args = { ... }
+				for k, v in pairs( args ) do
+					if type( v ) == "Panel" then
+						args[ k ] = SF.Panel.wrap( v )
+					else
+						args[ k ] = SF.WrapObject( v ) or v
+					end
+				end
+				local oldInstance = SF.instance
+				SF.instance = instance
+				v( unpack( args ) )
+				SF.instance = oldInstance
+			end
+		return
+		end
+	end
+	rawset( t, k, v )
+end
+
+SF.Panel.Panel.Methods = panel_methods
+SF.Panel.Panel.Metatable = panel_metamethods
 
 SF.Panel.Panel.unwrap = punwrap
 SF.Panel.unwrap = punwrap
@@ -110,28 +135,6 @@ do
 			incPanel( "dnumberwang" ) --DTextEntry
 	incPanel( "urllabel" ) --Panel
 	incPanel( "dhtml" ) --Awesomium
-end
-
-function panel_metamethods.__newindex( t, k, v )
-	if type( v ) == "function" then
-		local instance = SF.instance
-		punwrap( t )[ k:gsub( "^%l", string.upper ) ] = function( ... )
-			local args = { ... }
-			for k, v in pairs( args ) do
-				if type( v ) == "Panel" then
-					args[ k ] = SF.Panel.wrap( v )
-				else
-					args[ k ] = SF.WrapObject( v ) or v
-				end
-			end
-			local oldInstance = SF.instance
-			SF.instance = instance
-			v( unpack( args ) )
-			SF.instance = oldInstance
-		end
-	else
-		t[ k ] = v
-	end
 end
 
 SF.Panel.insts = {}
