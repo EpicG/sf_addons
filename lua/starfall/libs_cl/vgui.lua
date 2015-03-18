@@ -5,7 +5,7 @@ local plyCount = SF.Panel.plyCount
 
 function vgui_library.create( classname, parent, name )
     SF.CheckType( classname, "string" )
-    if parent then SF.CheckType( parent, SF.Types[ "Panel" ] ) end
+    if parent then SF.CheckType( parent, SF.Types[ "Panel.Panel" ] ) end
     if name then SF.CheckType( name, "string" ) end
 
 	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) return end

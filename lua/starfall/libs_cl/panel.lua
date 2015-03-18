@@ -7,7 +7,7 @@
 
 SF.Panel = {}
 
-local panel_methods, panel_metamethods = SF.Typedef( "Panel" )
+local panel_methods, panel_metamethods = SF.Typedef( "Panel.Panel" )
 local pwrap, punwrap = SF.CreateWrapper( panel_metamethods, true, true, debug.getregistry().Panel )
 
 SF.Panel.Panel = {}
