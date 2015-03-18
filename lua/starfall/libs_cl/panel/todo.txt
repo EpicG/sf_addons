@@ -20,8 +20,6 @@
 	--TODO: Documentation
 --TODO: dnumberscratch
 	--TODO: Documentation
---TODO: dpropertysheet
-	--TODO: Documentation
 --TODO: dcolorcombo
 	--TODO: Documentation
 --TODO: drgbpicker
@@ -143,4 +141,7 @@
 	--TODO: dtree documentation
 	--TODO: dtree_node
 		--TODO: animSilde
+		--TODO: Documentation
+	--TODO: dpropertysheet
+		--TODO: Wrap closeTab return ( currently nil )
 		--TODO: Documentation
