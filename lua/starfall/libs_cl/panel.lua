@@ -103,8 +103,6 @@ do
 			incPanel( "dcolorcube" ) --DSlider
 		incPanel( "dsprite" ) --DPanel
 	incPanel( "dprogress" ) --Panel
-	incPanel( "dproperties" ) --Panel
-	incPanel( "dproperty_combo" ) --Panel?
 	incPanel( "dtree_node" ) --Panel
 	incPanel( "dvscrollbar" ) --Panel
 	incPanel( "frame" ) --Panel
