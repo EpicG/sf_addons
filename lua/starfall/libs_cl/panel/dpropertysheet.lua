@@ -128,7 +128,7 @@ function this_methods:setupCloseButton( func )
 			local oldInst = SF.instance
 			SF.instance = instance
 			func( )
-			SF.instance = instance
+			SF.instance = oldInst
 		end
 	end
 end
