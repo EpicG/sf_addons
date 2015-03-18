@@ -68,8 +68,6 @@
 	--TODO: Documentation
 --TODO: dadjustablemodelpanel
 	--TODO: Documentation
---TODO: dtab
-	--TODO: Documentation
 --TODO: spawnicon
 	--TODO: Documentation
 --TODO: material
@@ -141,3 +139,4 @@
 	--TODO: dpropertysheet
 		--TODO: Wrap closeTab return ( currently nil )
 		--TODO: Documentation
+	--TODO: dtab documentation
