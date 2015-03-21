@@ -62,8 +62,6 @@
 	--TODO: Documentation
 --TODO: dcombobox
 	--TODO: Documentation
---TODO: dimagebutton
-	--TODO: Documentation
 --TODO: dmodelpanel
 	--TODO: Documentation
 --TODO: dadjustablemodelpanel
@@ -140,3 +138,4 @@
 		--TODO: Wrap closeTab return ( currently nil )
 		--TODO: Documentation
 	--TODO: dtab documentation
+	--TODO: dimagebutton documentation
