@@ -1598,7 +1598,8 @@ end
 -- @param bodygroups The bodygroups for the model to use, "" by default
 function panel_methods:setModel( model, skin, bodygroups )
 	SF.CheckType( self, panel_metamethods )
-	if model then SF.CheckType( skin, "number" ) end
+	SF.CheckType( model, "string" )
+	if skin then SF.CheckType( skin, "number" ) end
 	if bodygroups then SF.CheckType( bodygroups, "string" ) end
 
 	punwrap( self ):SetModel( model, skin or 0, bodygroups or "" )
