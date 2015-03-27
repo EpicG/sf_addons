@@ -62,8 +62,6 @@
 	--TODO: Documentation
 --TODO: dcombobox
 	--TODO: Documentation
---TODO: dmodelpanel
-	--TODO: Documentation
 --TODO: dadjustablemodelpanel
 	--TODO: Documentation
 --TODO: spawnicon
@@ -139,3 +137,4 @@
 		--TODO: Documentation
 	--TODO: dtab documentation
 	--TODO: dimagebutton documentation
+	--TODO: dmodelpanel documentation
