@@ -22,38 +22,40 @@ SF.Panel.wrap = function( panel, class )
 end
 
 function panel_metamethods.__newindex( t, k, v )
-	if type( v ) == "function" then
-		if punwrap( t )[ k:gsub( "^%l", string.upper ) ] ~= nil then
-			local instance = SF.instance
-			punwrap( t )[ k:gsub( "^%l", string.upper ) ] = function( ... )
-				local args = { ... }
+	if t ~= nil and k ~= nil then
+		if type( v ) == "function" then
+			if punwrap( t )[ k:gsub( "^%l", string.upper ) ] ~= nil then
+				local instance = SF.instance
+				punwrap( t )[ k:gsub( "^%l", string.upper ) ] = function( ... )
+					local args = { ... }
 
-				for k, v in pairs( args ) do
-					if type( v ) == "Panel" then
-						args[ k ] = SF.Panel.wrap( v ) --TODO: Wrap panel properly
-					else
-						args[ k ] = SF.WrapObject( v ) or v
+					for k, v in pairs( args ) do
+						if type( v ) == "Panel" then
+							args[ k ] = SF.Panel.wrap( v ) --TODO: Wrap panel properly
+						else
+							args[ k ] = SF.WrapObject( v ) or v
+						end
 					end
+					local oldInstance = SF.instance
+					SF.instance = instance
+
+					if k == "paint" then
+						SF.instance.data.render.isRendering = true
+					end
+
+					v( unpack( args ) )
+
+					if k == "paint" then
+						SF.instance.data.render.isRendering = false
+					end
+
+					SF.instance = oldInstance
 				end
-				local oldInstance = SF.instance
-				SF.instance = instance
-
-				if k == "paint" then
-					SF.instance.data.render.isRendering = true
-				end
-
-				v( unpack( args ) )
-
-				if k == "paint" then
-					SF.instance.data.render.isRendering = false
-				end
-
-				SF.instance = oldInstance
+				return
 			end
-			return
 		end
+		rawset( t, k, v )
 	end
-	rawset( t, k, v )
 end
 
 SF.Panel.Panel.Methods = panel_methods
