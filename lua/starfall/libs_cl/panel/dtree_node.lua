@@ -321,7 +321,7 @@ end
 function this_methods:addNode( name, icon )
 	SF.CheckType( self, this_metamethods )
 	SF.CheckType( name, "string" )
-	SF.CheckType( icon, "string" )
+	if icon then SF.CheckType( icon, "string" ) end
 
 	punwrap( self ):AddNode( name, icon )
 end
