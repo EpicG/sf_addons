@@ -323,7 +323,7 @@ function this_methods:addNode( name, icon )
 	SF.CheckType( name, "string" )
 	if icon then SF.CheckType( icon, "string" ) end
 
-	punwrap( self ):AddNode( name, icon )
+	return pwrap( punwrap( self ):AddNode( name, icon ) )
 end
 
 function this_methods:insertNode( node )
