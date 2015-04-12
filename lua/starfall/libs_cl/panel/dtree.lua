@@ -64,13 +64,17 @@ function this_methods:setSelectedItem( panel )
 	punwrap( self ):SetSelectedItem( punwrap( panel ) )
 end
 
---[[
-function this_metamethods:getSelectedItem( )
+function this_methods:getSelectedItem( )
 	SF.CheckType( self, this_metamethods )
 
-	return SF.Panel.wrap( punwrap( self ).m_pSelectedItem ) --TODO: return properly wrapped panel
+	local selected = punwrap( self ).m_pSelectedItem
+
+	if selected ~= nil then
+		selected = SF.Panel.DTree_node.wrap( selected )
+	end
+
+	return selected
 end
---]]
 
 function this_methods:setClickOnDragHover( enable )
 	SF.CheckType( self, this_metamethods )
