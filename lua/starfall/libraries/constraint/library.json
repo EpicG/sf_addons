@@ -1,0 +1,10 @@
+{
+	"name" : "constraint",
+	"description" : "Constraint library",
+	"dependencies" : [
+		"entity",
+		"vector",
+		"angle"
+	],
+	"version" : "iG"
+}

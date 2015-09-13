@@ -65,14 +65,10 @@ SF.Panel.Panel.unwrap = punwrap
 SF.Panel.unwrap = punwrap
 
 local function incPanel( name )
-	print( "-   Loading panel/" .. name .. ".lua" )
-	include( "starfall/libs_cl/panel/" .. name .. ".lua" )
+	include( "starfall/libraries/panel/panels/" .. name .. ".lua" )
 end
 
 do
-	local P = SF.Permissions
-	P.registerPrivilege( "panel.access", "Panel Access", "Allows the user to have access to panels" )
-
 	incPanel( "achievementicon" ) --Panel
 	incPanel( "avatarimage" ) --Panel
 	--incPanel( "contextbase" ) --Panel
@@ -828,7 +824,7 @@ end
 -- @param Color to change RichText to
 function panel_methods:insertColorChange( color )
 	SF.CheckType( self, panel_metamethods )
-	SF.CheckType( color, SF.Types[ "Colors" ] )
+	SF.CheckType( color, SF.Types[ "Color" ] )
 
 	punwrap( self ):InsertColorChange( color.r, color.g, color.b, color.a )
 end
@@ -1162,7 +1158,7 @@ end
 function panel_methods:moveToBack( )
 	SF.CheckType( self, panel_metamethods )
 
-	
+
 
 	punwrap( self ):MoveToBack( )
 end

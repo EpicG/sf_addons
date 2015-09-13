@@ -1,0 +1,18 @@
+{
+	"panel" : {
+		"description" : "Allow the user to create panels",
+		"children" : {
+			"children" : {
+				"self" : {
+					"default" : true
+				},
+				"buddy" : {
+					"default" : true
+				},
+				"other" : {
+					"default" : "owner"
+				}
+			}
+		}
+	}
+}

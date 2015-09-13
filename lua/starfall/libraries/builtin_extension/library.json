@@ -1,0 +1,8 @@
+{
+	"name" : "builtin_extension",
+	"description" : "Extends the builtin library",
+	"dependencies" : [
+		"builtin"
+	],
+	"version" : "iG"
+}

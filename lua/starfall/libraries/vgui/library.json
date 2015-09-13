@@ -1,0 +1,8 @@
+{
+	"name" : "panel",
+	"description" : "VGui library",
+	"dependencies" : [
+		"panel"
+	],
+	"version" : "iG"
+}

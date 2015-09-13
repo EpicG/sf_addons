@@ -76,10 +76,10 @@ local weight = {
 -- @param typ The type of the unit to convert from source
 -- @param val The value of the source unit
 -- @return The converted value
-function unit_library.toUnit( typ, val )
+function unit_library.toUnit ( typ, val )
 	SF.CheckType( typ, "string" )
 	SF.CheckType( val, "number" )
-	
+
 	if speed[ typ ] then
 		return ( val * 0.75 ) * speed[ typ ]
 	elseif length[ typ ] then
@@ -93,10 +93,10 @@ end
 -- @param typ The type of the unit to convert to source
 -- @param val The value of the typ unit
 -- @return The converted value
-function unit_library.fromUnit( typ, val )
+function unit_library.fromUnit ( typ, val )
 	SF.CheckType( typ, "string" )
 	SF.CheckType( val, "number" )
-	
+
 	if speed[ typ ] then
 		return ( val / 0.75 ) / speed[ typ ]
 	elseif length[ typ ] then
@@ -111,11 +111,11 @@ end
 -- @param typT The type of the final unit
 -- @param val The number to convert
 -- @return The converted value
-function unit_library.convertUnit( typF, typT, val )
+function unit_library.convertUnit ( typF, typT, val )
 	SF.CheckType( typF, "string" )
 	SF.CheckType( typT, "string" )
 	SF.CheckType( val, "number" )
-	
+
 	if speed[ typF ] and speed[ typT ] then
 		return val * (speed[ typT ] / speed[ typF ])
 	elseif length[ typF ] and length[ typT ] then

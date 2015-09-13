@@ -2,8 +2,8 @@
 local joystick_library, _ = SF.Libraries.Register("joystick")
 
 
-if file.Exists("lua/bin/gmcl_joystick_win32.dll", "GAME") then
-	require("joystick")
+if file.Exists( "lua/bin/gmcl_joystick_win32.dll", "GAME" ) then
+	require( "joystick" )
 end
 
 local next_updates = {}

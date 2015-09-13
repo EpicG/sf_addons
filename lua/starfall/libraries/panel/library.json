@@ -1,0 +1,11 @@
+{
+	"name" : "panel",
+	"description" : "Panel library",
+	"dependencies" : [
+		"entity",
+		"color",
+		"vector",
+		"angle"
+	],
+	"version" : "iG"
+}

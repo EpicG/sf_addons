@@ -16,11 +16,6 @@ local ents_metatable = SF.Entities.Metatable
 local wrap, unwrap = SF.Entities.Wrap, SF.Entities.Unwrap
 local vwrap, vunwrap = SF.WrapObject, SF.UnwrapObject
 
-do
-	local P = SF.Permissions
-	P.registerPrivilege( "constraint.any", "Constrain", "Allows the user to create constraints" )
-end
-
 --- Creates a table of entities recursively constrained to an entity
 -- @param ent Base entity of search
 -- @param default Default table to return

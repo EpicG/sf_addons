@@ -1,0 +1,8 @@
+{
+	"name" : "wire_extension",
+	"description" : "Extends the wire library",
+	"dependencies" : [
+		"wire"
+	],
+	"version" : "iG"
+}
