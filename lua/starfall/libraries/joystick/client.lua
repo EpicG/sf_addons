@@ -1,16 +1,17 @@
 --Joystick library; Full credit to thegrb93
-local joystick_library, _ = SF.Libraries.Register("joystick")
+local joystick_library = SF.Libraries.Register( "joystick" )
 
 
 if file.Exists( "lua/bin/gmcl_joystick_win32.dll", "GAME" ) then
 	require( "joystick" )
+
 end
 
 local next_updates = {}
 
 local function refresh( enum )
 	local next_update = next_updates[ enum ] or 0
-	if CurTime()>next_update then
+	if CurTime() > next_update then
 		next_updates[ enum ] = CurTime() + 0.0303
 		joystick.refresh( enum )
 	end
