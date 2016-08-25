@@ -41,3 +41,20 @@ end
 -- @class function
 -- @return Time in seconds
 SF.DefaultEnvironment.frameTime = FrameTime
+
+--- Returns the percent of quota used
+-- @name SF.DefaultEnvironment.quotaPercent
+-- @class function
+-- @return Percent of quota used
+function SF.DefaultEnvironment.quotaPercent()
+    return 100 * ( SF.instance.cpu_total / SF.instance.context.cpuTime.getMax() )
+end
+
+--- Returns if the quota has not exceeded the given limit
+-- @name SF.DefaultEnvironment.quotaSafe
+-- @class function
+-- @param quota The max "safe" quota
+-- @return Whether the quota is under the maximum safe quota
+function SF.DefaultEnvironment.quotaSafe( quota )
+    return 100 * ( SF.instance.cpu_total / SF.instance.context.cpuTime.getMax() ) < quota
+end
