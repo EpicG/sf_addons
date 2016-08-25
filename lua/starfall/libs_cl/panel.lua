@@ -75,6 +75,7 @@ do
 
 	incPanel( "achievementicon" ) --Panel
 	incPanel( "avatarimage" ) --Panel
+	incPanel( "awesomium" ) --Panel
 	--incPanel( "contextbase" ) --Panel
 	incPanel( "dcollapsiblecategory" ) --Panel
 		incPanel( "dform" ) --DCollapsibleCategory
