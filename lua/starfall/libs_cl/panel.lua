@@ -70,8 +70,7 @@ local function incPanel( name )
 end
 
 do
-	local P = SF.Permissions
-	P.registerPrivilege( "panel.access", "Panel Access", "Allows the user to have access to panels" )
+	SF.Permissions.registerPrivilege( "panel.access", "Panel Access", "Allows the user to have access to panels", {["Client"] = {}} )
 
 	incPanel( "achievementicon" ) --Panel
 	incPanel( "avatarimage" ) --Panel
@@ -164,7 +163,7 @@ SF.Libraries.AddHook("initialize",function( inst )
 	plyCount[ inst.player ] = plyCount[ inst.player ] or inst.data.panels.count
 end)
 
-SF.Libraries.AddHook("deinitialize", function( inst )
+local function cleanup( inst )
 	local panels = inst.data.panels.panels
 	for panel, _ in pairs( panels ) do
 		if IsValid( punwrap( panel ) ) then
@@ -176,8 +175,11 @@ SF.Libraries.AddHook("deinitialize", function( inst )
 	inst.data.panels.count = 0
 
 	insts[ inst ]= nil
-end)
+end
 
+SF.Libraries.AddHook( "deinitialize", cleanup )
+--hook.Add( "starfall_hud_disconnect", "cleanup panels", cleanup )
+	
 --- Adds the specified object to the panel
 -- @param panel The panel to be added.
 -- @return The new panel object
@@ -470,7 +472,7 @@ end
 -- @param paddingTop The top margin
 -- @param paddingRight The right margin
 -- @param paddingBottom The bottom margin
-function panel_methods:dockMargin( paddingLeft, paddingTop, paddingRight, paddingBottom )
+function panel_methods:dockPadding( paddingLeft, paddingTop, paddingRight, paddingBottom )
 	SF.CheckType( self, panel_metamethods )
 	SF.CheckType( paddingLeft, "number" )
 	SF.CheckType( paddingTop, "number" )

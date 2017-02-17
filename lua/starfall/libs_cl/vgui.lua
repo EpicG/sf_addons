@@ -7,8 +7,21 @@ function vgui_library.create( classname, parent, name )
     SF.CheckType( classname, "string" )
     if parent then SF.CheckType( parent, SF.Types[ "Panel.Panel" ] ) end
     if name then SF.CheckType( name, "string" ) end
+	
+	local foundlink
+	for hud, _ in pairs( SF.ConnectedHuds ) do
+		if hud.link == SF.instance.data.entity then
+			foundlink = hud
+			break
+		end
+	end
+ 
+	if not foundlink then
+		SF.throw( "No HUD component connected", 2 )
+		return
+	end
 
-	if not SF.Permissions.check( SF.instance.player, self, "panel.access" ) then SF.throw( "Insufficient permissions", 2 ) return end
+	SF.Permissions.check( SF.instance.player, nil, "panel.access" )
 
 	local instance = SF.instance
 	local paneldata = instance.data.panels
