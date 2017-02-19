@@ -17,3 +17,10 @@ SF.Panel.DLabel.unwrap = punwrap
 
 SF.Panel.DLabel.Methods = this_methods
 SF.Panel.DLabel.Metatable = this_metamethods
+
+function this_methods:setTextColor( color )
+	SF.CheckType( self, this_metamethods )
+	SF.CheckType( color, SF.Types[ "Color" ] )
+	
+	punwrap( self ):SetTextColor( SF.UnwrapObject( color ) )
+end
